@@ -69,17 +69,11 @@ end
 
 #the meat!
 def play(board)
- i = 0
- while i < 9
- i += 1
-if won?(board)
-  winner = winner(board)
-  puts "Congratulations #{winner}!"
-elsif over?(board)
+turn(board) until over?(board)
+if won?(board) 
+  puts "Congratulations #{winner(board)}!"
+elsif draw?(board) == true
   puts "Game over! Thanks for playing."
-else
-  turn(board)
-end
 end
 end
     
@@ -154,11 +148,11 @@ end
 #Tells you who won based on that winning sub_array combination
 def winner(board)
 sub_array = won?(board)
-  if !won?(board)
+  if won?(board) == false
     return nil
   elsif board[sub_array[1]] == "X"
    return "X"
   elsif board[sub_array[1]] == "O"
    return "O"
-  end
+end
 end
